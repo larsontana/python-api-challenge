@@ -64,3 +64,23 @@ places_data = response.json()
 
 # Print the json (pretty printed)
 print(json.dumps(places_data, indent=4, sort_keys=True))
+
+info_box_template = """
+<dl>
+<dt>Name</dt><dd>{Hotel Name}</dd>
+<dt>City</dt><dd>{City}</dd>
+<dt>Country</dt><dd>{Country}</dd>
+</dl>
+"""
+# Store the DataFrame Row
+# NOTE: be sure to update with your DataFrame name
+hotel_info = [info_box_template.format(**row) for index, row in narrowed_city_df.iterrows()]
+locations = hotel_df[["Lat", "Lng"]]
+
+# Show figure. 
+
+# Assign the marker layer to a variable
+markers = gmaps.marker_layer([(-34.42, 19.24),(32.68, -115.50),(19.71,-155.08)])
+# Add the layer to the map
+fig.add_layer(markers)
+fig
