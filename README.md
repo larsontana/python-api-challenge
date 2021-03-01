@@ -143,3 +143,143 @@ plt.ylabel("Wind Speed (mph)")
 plt.xlabel("Latitude")
 plt.grid(True)
 plt.savefig('../output_data/Lat_W.png')
+
+---- Linear Regression ---- 
+
+# Create dataframes for Northern and Southern Hemispheres. 
+northern = weather_list_df[weather_list_df['Lat']<1]
+southern = weather_list_df[weather_list_df['Lat']>1]
+
+# NH - Max Temp vs. Lat with Linear Regression
+x_values=northern['Lat']
+y_values = northern['Max Temp']
+(slope, intercept, rvalue, pvalue, stderr) = linregress(x_values, y_values)
+regress_values = x_values * slope + intercept
+line_eq = "y = " + str(round(slope,2)) + "x + " + str(round(intercept,2))
+plt.scatter(x_values,y_values)
+plt.plot(x_values,regress_values,"r-")
+plt.annotate(line_eq,(0,50),fontsize=15,color="red")
+plt.xlabel('Latitude')
+plt.ylabel('Max Temp')
+print(f"The r-squared is: {rvalue}")
+plt.show()
+plt.savefig('../output_data/N_linear_Lat_MT.png')
+
+# SH - Max Temp vs. Lat with Linear Regression
+x_values =southern['Lat']
+
+y_values = southern['Max Temp']
+
+(slope, intercept, rvalue, pvalue, stderr) = linregress(x_values, y_values)
+regress_values = x_values * slope + intercept
+line_eq = "y = " + str(round(slope,2)) + "x + " + str(round(intercept,2))
+plt.scatter(x_values,y_values)
+plt.plot(x_values,regress_values,"r-")
+plt.annotate(line_eq,(0,50),fontsize=15,color="red")
+plt.xlabel('Latitude')
+plt.ylabel('Max Temp')
+print(f"The r-squared is: {rvalue}")
+plt.show()
+plt.savefig('../output_data/S_linear_Lat_MT.png')
+
+# NH - Humidity (%) vs. Latitude with Linear Regression
+
+
+x_values =northern['Lat']
+y_values = northern['Humidity']
+
+(slope, intercept, rvalue, pvalue, stderr) = linregress(x_values, y_values)
+regress_values = x_values * slope + intercept
+line_eq = "y = " + str(round(slope,2)) + "x + " + str(round(intercept,2))
+plt.scatter(x_values,y_values)
+plt.plot(x_values,regress_values,"r-")
+plt.annotate(line_eq,(0,50),fontsize=15,color="red")
+plt.xlabel('Latitude')
+plt.ylabel('Humidity')
+print(f"The r-squared is: {rvalue}")
+plt.show()
+plt.savefig('../output_data/N_linear_Lat_Hum.png')
+
+# SH - Humidity (%) vs. Latitude with Linear Regression
+x_values =southern['Lat']
+y_values = southern['Humidity']
+
+(slope, intercept, rvalue, pvalue, stderr) = linregress(x_values, y_values)
+regress_values = x_values * slope + intercept
+line_eq = "y = " + str(round(slope,2)) + "x + " + str(round(intercept,2))
+plt.scatter(x_values,y_values)
+plt.plot(x_values,regress_values,"r-")
+plt.annotate(line_eq,(0,50),fontsize=15,color="red")
+plt.xlabel('Latitude')
+plt.ylabel('Humidity')
+print(f"The r-squared is: {rvalue}")
+plt.show()
+plt.savefig('../output_data/S_linear_Lat_Hum.png')
+
+# NH -  Cloudiness (%) vs. Latitude with Linear Regression
+
+x_values =northern['Lat']
+y_values = northern['Cloudiness']
+
+(slope, intercept, rvalue, pvalue, stderr) = linregress(x_values, y_values)
+regress_values = x_values * slope + intercept
+line_eq = "y = " + str(round(slope,2)) + "x + " + str(round(intercept,2))
+plt.scatter(x_values,y_values)
+plt.plot(x_values,regress_values,"r-")
+plt.annotate(line_eq,(0,50),fontsize=15,color="red")
+plt.xlabel('Latitude')
+plt.ylabel('Cloudiness')
+print(f"The r-squared is: {rvalue}")
+plt.show()
+plt.savefig('../output_data/N_linear_Lat_Cl.png')
+
+# SH -  Cloudiness (%) vs. Latitude with Linear Regression
+
+x_values =southern['Lat']
+y_values = southern['Cloudiness']
+
+(slope, intercept, rvalue, pvalue, stderr) = linregress(x_values, y_values)
+regress_values = x_values * slope + intercept
+line_eq = "y = " + str(round(slope,2)) + "x + " + str(round(intercept,2))
+plt.scatter(x_values,y_values)
+plt.plot(x_values,regress_values,"r-")
+plt.annotate(line_eq,(0,50),fontsize=15,color="red")
+plt.xlabel('Latitude')
+plt.ylabel('Cloudiness')
+print(f"The r-squared is: {rvalue}")
+plt.show()
+plt.savefig('../output_data/S_linear_Lat_Cl.png')
+
+# NH - Wind Speed (mph) vs. Latitude with Linear Regression
+
+x_values = northern['Lat']
+y_values = northern['Wind Speed']
+
+(slope, intercept, rvalue, pvalue, stderr) = linregress(x_values, y_values)
+regress_values = x_values * slope + intercept
+line_eq = "y = " + str(round(slope,2)) + "x + " + str(round(intercept,2))
+plt.scatter(x_values,y_values)
+plt.plot(x_values,regress_values,"r-")
+plt.annotate(line_eq,(0,8),fontsize=15,color="red")
+plt.xlabel('Wind speed')
+plt.ylabel('Max Temp')
+print(f"The r-squared is: {rvalue}")
+plt.show()
+plt.savefig('../output_data/N_linear_Lat_W.png')
+
+# SH - Wind Speed (mph) vs. Latitude with Linear Regression
+
+x_values = southern['Lat']
+y_values = southern['Wind Speed']
+
+(slope, intercept, rvalue, pvalue, stderr) = linregress(x_values, y_values)
+regress_values = x_values * slope + intercept
+line_eq = "y = " + str(round(slope,2)) + "x + " + str(round(intercept,2))
+plt.scatter(x_values,y_values)
+plt.plot(x_values,regress_values,"r-")
+plt.annotate(line_eq,(0,5),fontsize=15,color="red")
+plt.xlabel('Wind speed')
+plt.ylabel('Max Temp')
+print(f"The r-squared is: {rvalue}")
+plt.show()
+plt.savefig('../output_data/S_linear_Lat_W.png')
