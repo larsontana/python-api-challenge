@@ -52,7 +52,7 @@ c_id= []
 name = []
 country = []
 long = []
-lat = []
+latt = []
 cloudiness= []
 date= []
 humidity= []
@@ -82,3 +82,64 @@ try:
    except KeyError:
     pass                         
   
+  ---- Convert Raw Data to DataFrame ---- 
+  
+  weather_list_df = pd.DataFrame({'City ID':c_id,'City':name,'Country':country,'Lng':long,'Lat':latt, 'Cloudiness':cloudiness, 'Date': date, 'Humidity': humidity, 'Max Temp':max_temp, 'Wind Speed':wind_speed})
+  
+weather_list_df.to_csv(output_data_file,index = False)
+weather_list_df.head(10)
+
+---- Plotting the Data ----
+
+# Latitude vs Temperature Plot
+plt.scatter(weather_list_df['Lat'], weather_list_df['Max Temp'],marker="v", facecolors="blue", edgecolors="black)
+#  Set lower and upper limits
+plt.ylim(0,120)
+plt.xlim(-60,180)
+# Create title and labels. 
+plt.title("City Latitude vs. Max Temperature")
+plt.ylabel("Maximum Temperature (F)")
+plt.xlabel("Latitude")
+plt.grid(True)
+plt.savefig('../output_data/Lat_MT.png')
+
+# Latitude vs. Humidity Plot
+plt.scatter(weather_list_df['Lat'], weather_list_df['Humidity'], marker="v", facecolors="blue", edgecolors="black")
+# Set the upper and lower limits.
+plt.ylim(0,300)
+plt.xlim(-60,180)
+
+# Create a title, x label, and y label for our chart
+plt.title("City Latitude vs. Humidity")
+plt.ylabel("Humidity (%)")
+plt.xlabel("Latitude")
+plt.grid(True)
+plt.savefig('../output_data/Lat_Hum.png')
+
+# Latitude vs. Cloudiness Plot
+plt.scatter(weather_list_df['Lat'], weather_list_df['Cloudiness'], marker="v", facecolors="blue", edgecolors="black")
+# Set the upper and lower limits.
+plt.ylim(0,100)
+plt.xlim(-60,180)
+# Create a title, x label, and y label for our chart
+plt.title("City Latitude vs. Cloudiness")
+plt.ylabel("Cloudiness (%)")
+plt.xlabel("Latitude")
+plt.grid(True)
+plt.savefig('../output_data/Lat_Cl.png')
+
+# Latitude vs. Wind Speed Plot
+plt.scatter(weather_list_df['Lat'], weather_list_df['Wind Speed'], marker="v", facecolors="blue", edgecolors="black")
+
+# Set the upper and lower limits of our y axis
+plt.ylim(0,50)
+
+# Set the upper and lower limits of our x axis
+# plt.xlim(-60,180)
+
+# Create a title, x label, and y label for our chart
+plt.title("City Latitude vs. Wind Speed (11/14/2019)")
+plt.ylabel("Wind Speed (mph)")
+plt.xlabel("Latitude")
+plt.grid(True)
+plt.savefig('../output_data/Lat_W.png')
