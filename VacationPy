@@ -9,3 +9,58 @@ import os
 
 from api_keys import g_key
 
+# Load the CSV file. 
+cities_df = pd.read_csv('../output_data/cities.csv', index_col = False)
+cities_df
+
+# ---- Humidity Heat Map ----
+
+gmaps.configure(api_key=g_key)
+# Store 'Lat' and 'Lng' into locations. 
+locations = cities_df[["Lat", "Lng"]].astype(float)
+humidity_weight = cities_df["Humidity"].astype(float)
+
+# ---- Create a poverty heatmap layer ---- 
+
+fig = gmaps.figure()
+
+heat_layer = gmaps.heatmap_layer(locations, weights=humidity_weight, 
+                                 dissipating=False, max_intensity=100,
+                                 point_radius = 1)
+fig.add_layer(heat_layer)
+fig
+
+# ---- Dataframe with weather criteria ----
+#  A max temperature lower than 80 degrees but higher than 70.
+#  Wind speed less than 10 mph.
+# Zero cloudiness.
+
+hotel_df = cities_df[(cities_df['Max Temp'] > 70) & (cities_df['Max Temp'] < 80)& (cities_df['Wind Speed'] < 10)& (cities_df['Cloudiness'] < 3)]
+hotel_df
+
+---- Hotel Map ----
+
+target_coordinates = ['-34.42, 19.24','32.68, -115.50','19.71,-155.08']
+target_radius = 5000
+target_type = "hotels"
+
+# Parameters dictionary.
+params = {
+    "location": target_coordinates[1],
+     "keyword": target_search,
+    "radius": target_radius,
+    "type": target_type,
+    "key": g_key
+}
+
+# base url
+base_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
+
+# run a request using our params dictionary
+response = requests.get(base_url, params=params)
+
+# convert response to json
+places_data = response.json()
+
+# Print the json (pretty printed)
+print(json.dumps(places_data, indent=4, sort_keys=True))
